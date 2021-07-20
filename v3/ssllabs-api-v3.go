@@ -41,6 +41,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"sync/atomic"
@@ -872,7 +873,7 @@ func (c *SSLLabsClient) invokeInfo() (*LabsInfo, error) {
 }
 
 func (c *SSLLabsClient) invokeAnalyze(host string, startNew bool, fromCache bool) (*LabsReport, error) {
-	var command = "analyze?host=" + host + "&all=done"
+	var command = "analyze?host=" + url.QueryEscape(host) + "&all=done"
 
 	if fromCache {
 		command = command + "&fromCache=on"
